@@ -11,6 +11,7 @@ class TurfTouchAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       foregroundColor: CTheme.of(context).theme.backgroundInverse,
       backgroundColor: CTheme.of(context).theme.backgroundColor,
+      surfaceTintColor: Colors.transparent,
       actions: [
         IconButton(
           onPressed: () {

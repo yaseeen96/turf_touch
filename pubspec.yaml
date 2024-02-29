@@ -39,6 +39,7 @@ dependencies:
   flutter_riverpod: ^2.4.10
   animate_do: ^3.3.3
   gap: ^3.0.1
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:

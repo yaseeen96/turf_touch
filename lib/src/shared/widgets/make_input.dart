@@ -7,13 +7,17 @@ class MakeInput extends StatelessWidget {
   final Function(String? value) validator;
   final Function(String? value)? onChanged;
   final Function(String? value) onSaved;
+  final String? prefixText;
+  final TextInputType? textInputType;
   const MakeInput({
     super.key,
     required this.label,
     this.obscureText = false,
     required this.validator,
     required this.onSaved,
+    this.prefixText,
     this.onChanged,
+    this.textInputType,
   });
 
   @override
@@ -29,6 +33,7 @@ class MakeInput extends StatelessWidget {
           height: 5,
         ),
         TextFormField(
+          keyboardType: textInputType,
           onChanged: (value) {
             if (onChanged != null) {
               onChanged!(value);
@@ -45,6 +50,11 @@ class MakeInput extends StatelessWidget {
           style: CTheme.of(context).theme.bodyText,
           obscureText: obscureText,
           decoration: InputDecoration(
+            prefixText: prefixText,
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+              color: CTheme.of(context).theme.backgroundInverse,
+            )),
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
             enabledBorder: OutlineInputBorder(

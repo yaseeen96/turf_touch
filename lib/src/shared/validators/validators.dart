@@ -32,3 +32,27 @@ String? passwordValidator(String? value) {
     return null; // The password is valid
   }
 }
+
+String? mobileNumberValidator(String? value) {
+  // Regular expression for validating an Indian mobile number
+  final RegExp mobileRegex = RegExp(r'^[6789]\d{9}$');
+
+  if (value == null || value.isEmpty) {
+    return 'Please enter a mobile number';
+  } else if (!mobileRegex.hasMatch(value)) {
+    return 'Please enter a valid 10-digit Indian mobile number';
+  }
+  return null; // The mobile number is valid
+}
+
+String? nameValidator(String? value) {
+  // Regular expression for validating a name (allowing alphabetic characters and spaces only)
+  final RegExp nameRegex = RegExp(r'^[a-zA-Z\s]+$');
+
+  if (value == null || value.isEmpty) {
+    return 'Please enter a name'; // Check if the value is null or empty
+  } else if (!nameRegex.hasMatch(value)) {
+    return 'Please enter a valid name (alphabetic characters only)'; // Check if the name matches the pattern
+  }
+  return null; // The name is valid
+}

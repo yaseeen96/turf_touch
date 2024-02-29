@@ -48,7 +48,7 @@ class _LandingScreenState extends State<LandingScreen> {
                   FadeInUp(
                       duration: const Duration(milliseconds: 1200),
                       child: Text(
-                        "Automatic identity verification which enables you to verify your identity",
+                        "🏆 Quick & Easy Turf Booking! Secure Your Ideal Sports Venue Instantly! ⚽🎾",
                         textAlign: TextAlign.center,
                         style: CTheme.of(context).theme.label,
                       )),
@@ -84,23 +84,24 @@ class _LandingScreenState extends State<LandingScreen> {
                     height: 20,
                   ),
                   FadeInUp(
-                      duration: const Duration(milliseconds: 1600),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: MaterialButton(
-                          minWidth: double.infinity,
-                          height: 60,
-                          onPressed: onSignupPress,
-                          color: CTheme.of(context).theme.primaryColor,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50)),
-                          child: Text("Sign up",
-                              style: CTheme.of(context).theme.subheading),
-                        ),
-                      ))
+                    duration: const Duration(milliseconds: 1600),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: MaterialButton(
+                        minWidth: double.infinity,
+                        height: 60,
+                        onPressed: onSignupPress,
+                        color: CTheme.of(context).theme.primaryColor,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50)),
+                        child: Text("Sign up",
+                            style: CTheme.of(context).theme.subheading),
+                      ),
+                    ),
+                  ),
                 ],
               )
             ],

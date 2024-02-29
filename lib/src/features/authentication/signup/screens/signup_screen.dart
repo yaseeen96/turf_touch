@@ -16,6 +16,10 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   final formKey = GlobalKey<FormState>();
   String? email;
+  String? fName;
+  String? lName;
+
+  String? mobileNumber;
   String? pass;
   String? confirmPass;
   void onLoginPress() {
@@ -40,7 +44,6 @@ class _SignupScreenState extends State<SignupScreen> {
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 40),
-          height: MediaQuery.of(context).size.height - 50,
           width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -71,12 +74,45 @@ class _SignupScreenState extends State<SignupScreen> {
                     FadeInUp(
                         duration: const Duration(milliseconds: 1200),
                         child: MakeInput(
+                          label: "First Name",
+                          validator: (value) {
+                            return nameValidator(value);
+                          },
+                          onSaved: (value) {
+                            fName = value;
+                          },
+                        )),
+                    FadeInUp(
+                        duration: const Duration(milliseconds: 1200),
+                        child: MakeInput(
+                          label: "Last Name",
+                          validator: (value) {
+                            return nameValidator(value);
+                          },
+                          onSaved: (value) {
+                            lName = value;
+                          },
+                        )),
+                    FadeInUp(
+                        duration: const Duration(milliseconds: 1200),
+                        child: MakeInput(
                           label: "Email",
                           validator: (value) {
                             return emailValidator(value);
                           },
                           onSaved: (value) {
                             email = value;
+                          },
+                        )),
+                    FadeInUp(
+                        duration: const Duration(milliseconds: 1200),
+                        child: MakeInput(
+                          label: "Mobile Number",
+                          validator: (value) {
+                            return mobileNumberValidator(value);
+                          },
+                          onSaved: (value) {
+                            mobileNumber = value;
                           },
                         )),
                     FadeInUp(
@@ -95,20 +131,21 @@ class _SignupScreenState extends State<SignupScreen> {
                           },
                         )),
                     FadeInUp(
-                        duration: const Duration(milliseconds: 1400),
-                        child: MakeInput(
-                          label: "Confirm Password",
-                          obscureText: true,
-                          validator: (value) {
-                            if (value != pass) {
-                              return "Passwords do not match";
-                            }
-                            return null;
-                          },
-                          onSaved: (value) {
-                            email = value;
-                          },
-                        )),
+                      duration: const Duration(milliseconds: 1400),
+                      child: MakeInput(
+                        label: "Confirm Password",
+                        obscureText: true,
+                        validator: (value) {
+                          if (value != pass) {
+                            return "Passwords do not match";
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          email = value;
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -126,31 +163,31 @@ class _SignupScreenState extends State<SignupScreen> {
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
-                      child: const Text(
+                      child: Text(
                         "Sign up",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 18),
+                        style: CTheme.of(context).theme.subheading,
                       ),
                     ),
                   )),
               FadeInUp(
-                  duration: const Duration(milliseconds: 1600),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Already have an account?",
-                        style: CTheme.of(context).theme.label,
+                duration: const Duration(milliseconds: 1600),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Already have an account?",
+                      style: CTheme.of(context).theme.label,
+                    ),
+                    InkWell(
+                      onTap: onLoginPress,
+                      child: Text(
+                        " Login",
+                        style: CTheme.of(context).theme.bodyText,
                       ),
-                      InkWell(
-                        onTap: onLoginPress,
-                        child: Text(
-                          " Login",
-                          style: CTheme.of(context).theme.bodyText,
-                        ),
-                      ),
-                    ],
-                  )),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

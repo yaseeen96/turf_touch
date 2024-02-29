@@ -46,11 +46,12 @@ class _LoginScreenState extends State<LoginScreen> {
             child: FadeInUp(
                 duration: const Duration(milliseconds: 1200),
                 child: Container(
-                  height: MediaQuery.of(context).size.height / 2.5,
+                  height: MediaQuery.of(context).size.height / 3,
                   decoration: const BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage('assets/background.png'),
-                          fit: BoxFit.cover)),
+                    image: AssetImage('assets/background.png'),
+                    fit: BoxFit.cover,
+                  )),
                 )),
           ),
           SizedBox(
@@ -161,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 FadeInUp(
                     duration: const Duration(milliseconds: 1200),
                     child: Container(
-                      height: MediaQuery.of(context).size.height / 3,
+                      height: MediaQuery.of(context).size.height / 3.2,
                     ))
               ],
             ),
