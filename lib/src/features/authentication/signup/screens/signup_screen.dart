@@ -2,9 +2,12 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:turf_touch/src/config/theme/theme_state.dart';
+import 'package:turf_touch/src/features/authentication/signup/services/signup_service.dart';
+import 'package:turf_touch/src/shared/exceptions/exceptions.dart';
 import 'package:turf_touch/src/shared/validators/validators.dart';
 import 'package:turf_touch/src/shared/widgets/app_bar.dart';
 import 'package:turf_touch/src/shared/widgets/make_input.dart';
+import 'package:turf_touch/src/shared/widgets/top_snackbar.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -14,11 +17,11 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  bool isLoading = false;
   final formKey = GlobalKey<FormState>();
   String? email;
   String? fName;
   String? lName;
-
   String? mobileNumber;
   String? pass;
   String? confirmPass;
@@ -26,12 +29,45 @@ class _SignupScreenState extends State<SignupScreen> {
     context.go("/login");
   }
 
-  void onSignupPress() {
+  void onSignupPress() async {
     if (formKey.currentState == null) {
       return;
     }
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
+      try {
+        setState(() {
+          isLoading = true;
+        });
+        print("email: $email");
+        print("password: $pass");
+        print("mobilenumber: $mobileNumber");
+        print("fname: $fName");
+        print("lname: $lName");
+        final response = await signupService(
+          email: email!,
+          password: pass!,
+          mobileNumber: mobileNumber!,
+          firstName: fName!,
+          lastName: lName!,
+        );
+
+        if (!context.mounted) {
+          return;
+        }
+        getSnackBar(context: context, message: response);
+        context.go("/login");
+      } on TurfTouchException catch (err) {
+        if (!context.mounted) {
+          return;
+        }
+        getSnackBar(
+            context: context, message: err.message, type: SNACKBARTYPE.error);
+      } finally {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 
@@ -114,6 +150,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           onSaved: (value) {
                             mobileNumber = value;
                           },
+                          textInputType: TextInputType.number,
                         )),
                     FadeInUp(
                         duration: const Duration(milliseconds: 1300),
@@ -127,7 +164,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             return passwordValidator(value);
                           },
                           onSaved: (value) {
-                            email = value;
+                            pass = value;
                           },
                         )),
                     FadeInUp(
@@ -142,7 +179,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           return null;
                         },
                         onSaved: (value) {
-                          email = value;
+                          pass = value;
                         },
                       ),
                     ),
@@ -158,15 +195,17 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: MaterialButton(
                       minWidth: double.infinity,
                       height: 60,
-                      onPressed: onSignupPress,
+                      onPressed: isLoading ? () {} : onSignupPress,
                       color: CTheme.of(context).theme.primaryColor,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
-                      child: Text(
-                        "Sign up",
-                        style: CTheme.of(context).theme.subheading,
-                      ),
+                      child: isLoading
+                          ? const CircularProgressIndicator()
+                          : Text(
+                              "Sign up",
+                              style: CTheme.of(context).theme.subheading,
+                            ),
                     ),
                   )),
               FadeInUp(
