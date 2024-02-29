@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:turf_touch/src/config/theme/theme_state.dart';
 import 'package:turf_touch/src/features/authentication/landing/screens/landing_screen.dart';
@@ -39,8 +40,20 @@ CustomTransitionPage buildPageWithDefaultTransition(
 
 final goRouterConfig = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: "/auth_landing",
+  initialLocation: "/",
   routes: [
+    GoRoute(
+      path: "/",
+      redirect: (context, state) async {
+        const storage = FlutterSecureStorage();
+        final token = await storage.read(key: "token");
+        if (token != null) {
+          return "/home";
+        } else {
+          return "/auth_landing";
+        }
+      },
+    ),
     // auth routes
     GoRoute(
       parentNavigatorKey: _rootNavigatorKey,
