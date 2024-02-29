@@ -12,6 +12,7 @@ class AppTheme {
   final TextStyle subheading;
   final TextStyle label;
   final CthemeMode cthemeMode;
+  final ButtonStyle buttonStyle;
 
   AppTheme({
     required this.backgroundColor,
@@ -23,5 +24,6 @@ class AppTheme {
     required this.cthemeMode,
     required this.backgroundInverse,
     required this.label,
+    required this.buttonStyle,
   });
 }

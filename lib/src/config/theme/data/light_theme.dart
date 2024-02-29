@@ -2,22 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:turf_touch/src/config/theme/app_theme.dart';
 
 final lightThemeData = AppTheme(
-    backgroundInverse: Colors.black,
-    cthemeMode: CthemeMode.light,
-    backgroundColor: Colors.white,
-    primaryColor: Colors.red,
-    accentColor: Colors.amber,
-    bodyText: const TextStyle(
-      color: Colors.black,
-      fontSize: 14,
+  backgroundInverse: Colors.black,
+  cthemeMode: CthemeMode.light,
+  backgroundColor: Colors.white,
+  primaryColor: Colors.red,
+  accentColor: Colors.amber,
+  bodyText: const TextStyle(
+    color: Colors.black,
+    fontSize: 14,
+  ),
+  heading: const TextStyle(
+    color: Colors.black,
+    fontSize: 30,
+    fontWeight: FontWeight.bold,
+  ),
+  subheading: const TextStyle(
+    color: Colors.black,
+    fontSize: 18,
+  ),
+  label: TextStyle(color: Colors.grey[700], fontSize: 15),
+  buttonStyle: ElevatedButton.styleFrom(
+    padding: const EdgeInsets.symmetric(
+      vertical: 10,
+      horizontal: 20,
     ),
-    heading: const TextStyle(
-      color: Colors.black,
-      fontSize: 30,
-      fontWeight: FontWeight.bold,
+    backgroundColor: Colors.red,
+    foregroundColor: Colors.white,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
     ),
-    subheading: const TextStyle(
-      color: Colors.black,
-      fontSize: 18,
-    ),
-    label: TextStyle(color: Colors.grey[700], fontSize: 15));
+  ),
+);

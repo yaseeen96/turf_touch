@@ -24,4 +24,15 @@ final darkThemeData = AppTheme(
     color: Colors.grey[400],
     fontSize: 15,
   ),
+  buttonStyle: ElevatedButton.styleFrom(
+    padding: const EdgeInsets.symmetric(
+      vertical: 10,
+      horizontal: 20,
+    ),
+    backgroundColor: Colors.red,
+    foregroundColor: Colors.white,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
+  ),
 );

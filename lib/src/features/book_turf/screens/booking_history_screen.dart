@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class BookTurfScreen extends StatelessWidget {
-  const BookTurfScreen({super.key});
+class BookingHistory extends StatelessWidget {
+  const BookingHistory({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text("Book Turf Screen"),
+      child: Text("Booking History"),
     );
   }
 }
