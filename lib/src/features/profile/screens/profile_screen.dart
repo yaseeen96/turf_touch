@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gap/gap.dart';
 import 'package:turf_touch/src/config/theme/theme_state.dart';
 import 'package:turf_touch/src/features/profile/widgets/image_picker.dart';
 import 'package:turf_touch/src/shared/validators/validators.dart';
@@ -29,13 +30,15 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       backgroundColor: CTheme.of(context).theme.backgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
       ),
       body: Column(
         children: [
           Expanded(
             flex: 1,
             child: Container(
-              decoration: const BoxDecoration(color: Colors.red),
+              decoration: BoxDecoration(
+                  color: CTheme.of(context).theme.backgroundInverse),
               child: TurfTouchImagePicker(
                 onImagePicked: (File? image) {
                   setState(() {
@@ -96,9 +99,27 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             height: 50,
                             width: MediaQuery.of(context).size.width / 1.5,
                             child: ElevatedButton(
-                                style: CTheme.of(context).theme.buttonStyle,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: CTheme.of(context)
+                                      .theme
+                                      .backgroundInverse,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  foregroundColor:
+                                      CTheme.of(context).theme.backgroundColor,
+                                ),
                                 onPressed: () {},
                                 child: const Text("Update Profile")),
+                          ),
+                          const Gap(20),
+                          SizedBox(
+                            height: 50,
+                            width: MediaQuery.of(context).size.width / 1.5,
+                            child: ElevatedButton(
+                                style: CTheme.of(context).theme.buttonStyle,
+                                onPressed: () {},
+                                child: const Text("Logout")),
                           ),
                         ])),
               ),
