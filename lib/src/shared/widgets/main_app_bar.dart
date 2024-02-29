@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:turf_touch/src/config/theme/app_theme.dart';
 import 'package:turf_touch/src/config/theme/theme_state.dart'; // Import your custom theme
 
@@ -16,9 +17,14 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       surfaceTintColor: Colors.transparent,
       title: Row(
         children: [
-          const CircleAvatar(
-            radius: 40,
-            foregroundImage: AssetImage("assets/sample_profile.jpeg"),
+          InkWell(
+            onTap: () {
+              context.push("/profile");
+            },
+            child: const CircleAvatar(
+              radius: 40,
+              foregroundImage: AssetImage("assets/sample_profile.jpeg"),
+            ),
           ),
           const Gap(10),
           Column(
@@ -30,7 +36,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.location_on,
                     color: Colors.green,
                   ),

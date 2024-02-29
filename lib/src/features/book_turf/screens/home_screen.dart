@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:turf_touch/src/config/theme/theme_state.dart';
 
@@ -44,6 +43,7 @@ class HomeScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         image: DecorationImage(
+                            fit: BoxFit.cover,
                             image: AssetImage("assets/turf/$i.jpg"))),
                   );
                 },

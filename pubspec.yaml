@@ -41,6 +41,7 @@ dependencies:
   gap: ^3.0.1
   flutter_launcher_icons: ^0.13.1
   carousel_slider: ^4.2.1
+  image_picker: ^1.0.7
 
 dev_dependencies:
   flutter_test:
