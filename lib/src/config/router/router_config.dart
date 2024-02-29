@@ -39,7 +39,7 @@ CustomTransitionPage buildPageWithDefaultTransition(
 
 final goRouterConfig = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: "/home",
+  initialLocation: "/auth_landing",
   routes: [
     // auth routes
     GoRoute(

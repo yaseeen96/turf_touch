@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:turf_touch/src/config/theme/app_theme.dart';
@@ -30,10 +31,27 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Welcome Yaseen",
-                style: CTheme.of(context).theme.subheading,
-              ),
+              FutureBuilder(
+                  future: FlutterSecureStorage().read(key: "name"),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const LinearProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      return Text(
+                        "Welcome User",
+                        style: CTheme.of(context).theme.subheading,
+                      );
+                    } else if (snapshot.hasData) {
+                      return Text(
+                        "Welcome ${snapshot.data}",
+                        style: CTheme.of(context).theme.subheading,
+                      );
+                    }
+                    return Text(
+                      "Welcome User",
+                      style: CTheme.of(context).theme.subheading,
+                    );
+                  }),
               Row(
                 children: [
                   const Icon(
