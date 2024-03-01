@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:turf_touch/src/config/theme/theme_state.dart';
 import 'package:turf_touch/src/constants/time_slots.dart';
 import 'package:turf_touch/src/features/main/features/book_turf/providers/book_turf_providers.dart';
-import 'package:turf_touch/src/features/main/features/book_turf/services/get_booked_slots.dart';
-import 'package:turf_touch/src/shared/exceptions/exceptions.dart';
 
 class SelectTimeStepper extends ConsumerStatefulWidget {
   const SelectTimeStepper({super.key});
@@ -40,7 +38,7 @@ class _SelectTimeStepperState extends ConsumerState<SelectTimeStepper> {
   Widget build(BuildContext context) {
     // TODO - call API and remove time slots which are booked
     final selectedDate = ref.watch(selectedDateProvider);
-    List<String> _selectedTimeSlots = ref.watch(selectedTimeSlotsProvider);
+    List<String> selectedTimeSlots = ref.watch(selectedTimeSlotsProvider);
     return SizedBox(
       height: MediaQuery.of(context).size.height - 300,
       child: ListView(
@@ -51,7 +49,7 @@ class _SelectTimeStepperState extends ConsumerState<SelectTimeStepper> {
                   convertTo12HourFormat(timeSlot),
                   style: CTheme.of(context).theme.bodyText,
                 ),
-                value: _selectedTimeSlots.contains(timeSlot),
+                value: selectedTimeSlots.contains(timeSlot),
                 onChanged: (bool? value) {
                   _onTimeSlotSelected(value!, timeSlot);
                 },

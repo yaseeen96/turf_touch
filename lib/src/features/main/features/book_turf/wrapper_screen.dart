@@ -6,6 +6,8 @@ import 'package:turf_touch/src/features/main/features/book_turf/steppers/select_
 import 'package:turf_touch/src/shared/widgets/app_bar.dart';
 
 class WrapperScreen extends StatefulWidget {
+  const WrapperScreen({super.key});
+
   @override
   _WrapperScreenState createState() => _WrapperScreenState();
 }
@@ -34,13 +36,13 @@ class _WrapperScreenState extends State<WrapperScreen> {
             state: _currentStep >= 0 ? StepState.complete : StepState.disabled,
           ),
           Step(
-            title: Text('Select Time'),
-            content: SelectTimeStepper(),
+            title: const Text('Select Time'),
+            content: const SelectTimeStepper(),
             isActive: _currentStep >= 0,
             state: _currentStep >= 1 ? StepState.complete : StepState.disabled,
           ),
           Step(
-            title: Text('Pay'),
+            title: const Text('Pay'),
             content: const PaymentStepper(),
             isActive: _currentStep >= 0,
             state: _currentStep >= 2 ? StepState.complete : StepState.disabled,

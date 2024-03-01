@@ -20,6 +20,8 @@ class PaymentStepper extends ConsumerStatefulWidget {
 class _PaymentStepperState extends ConsumerState<PaymentStepper> {
   late GetPackagesResponseModel prices;
   late double totalPrice;
+  bool payOnSpot = false;
+  bool razorPay = false;
 
   void getPackages() async {
     try {
@@ -53,7 +55,7 @@ class _PaymentStepperState extends ConsumerState<PaymentStepper> {
     var formatter = DateFormat('E');
     String today = formatter.format(now); // Get today's weekday
 
-    slots.forEach((slot) {
+    for (var slot in slots) {
       int startHour = int.parse(slot.split('-')[0]);
       bool isWeekend = today == 'Sat' || today == 'Sun';
       bool isMorning = startHour < 12;
@@ -71,7 +73,7 @@ class _PaymentStepperState extends ConsumerState<PaymentStepper> {
       if (price != null) {
         totalPrice += double.parse(price);
       }
-    });
+    }
 
     setState(() {}); // Update the UI
   }
@@ -100,17 +102,20 @@ class _PaymentStepperState extends ConsumerState<PaymentStepper> {
             width: double.infinity,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                image: DecorationImage(
+                image: const DecorationImage(
                     fit: BoxFit.cover, image: AssetImage("assets/turf/1.jpg"))),
           ),
           const Gap(30),
           Container(
-            padding: EdgeInsets.all(12),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
+                      color: CTheme.of(context)
+                          .theme
+                          .backgroundInverse
+                          .withOpacity(0.2),
                       offset: Offset.fromDirection(360),
                       spreadRadius: 2,
                       blurRadius: 4),
@@ -151,6 +156,90 @@ class _PaymentStepperState extends ConsumerState<PaymentStepper> {
               ],
             ),
           ),
+          const Gap(20),
+          Container(
+            decoration: BoxDecoration(
+              color: CTheme.of(context).theme.backgroundColor,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                    color: CTheme.of(context)
+                        .theme
+                        .backgroundInverse
+                        .withOpacity(0.2),
+                    offset: Offset.fromDirection(360),
+                    spreadRadius: 2,
+                    blurRadius: 4),
+              ],
+            ),
+            child: CheckboxListTile(
+              title:
+                  Text("Pay on Spot", style: CTheme.of(context).theme.bodyText),
+              value: payOnSpot,
+              onChanged: (bool? value) {
+                setState(() {
+                  payOnSpot = value!;
+                  razorPay =
+                      !payOnSpot; // Uncheck Razor Pay if Pay on Spot is checked
+                });
+              },
+              secondary: Icon(
+                Icons.payment,
+                color: CTheme.of(context).theme.backgroundInverse,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+          const Gap(20),
+          Container(
+            decoration: BoxDecoration(
+              color: CTheme.of(context).theme.backgroundColor,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                    color: CTheme.of(context)
+                        .theme
+                        .backgroundInverse
+                        .withOpacity(0.2),
+                    offset: Offset.fromDirection(360),
+                    spreadRadius: 2,
+                    blurRadius: 4),
+              ],
+            ),
+            child: CheckboxListTile(
+              title: Text(
+                "Razor Pay",
+                style: CTheme.of(context).theme.bodyText,
+              ),
+              value: razorPay,
+              onChanged: (bool? value) {
+                setState(() {
+                  razorPay = value!;
+                  payOnSpot =
+                      !razorPay; // Uncheck Pay on Spot if Razor Pay is checked
+                });
+              },
+              secondary: Icon(
+                Icons.credit_card,
+                color: CTheme.of(context).theme.backgroundInverse,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+          const Gap(20),
+          SizedBox(
+            width: double.infinity,
+            height: 60,
+            child: ElevatedButton(
+              onPressed: () {},
+              style: CTheme.of(context).theme.buttonStyle,
+              child: const Text("Pay"),
+            ),
+          )
         ],
       ),
     );

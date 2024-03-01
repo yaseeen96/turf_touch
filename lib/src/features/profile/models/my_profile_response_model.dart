@@ -35,14 +35,14 @@ class MyProfileResponseModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["first_name"] = firstName;
-    _data["last_name"] = lastName;
-    _data["profile"] = profile;
-    _data["phone_no"] = phoneNo;
-    _data["email"] = email;
-    _data["created_at"] = createdAt;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["first_name"] = firstName;
+    data["last_name"] = lastName;
+    data["profile"] = profile;
+    data["phone_no"] = phoneNo;
+    data["email"] = email;
+    data["created_at"] = createdAt;
+    return data;
   }
 }

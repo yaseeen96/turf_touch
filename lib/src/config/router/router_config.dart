@@ -180,7 +180,7 @@ final goRouterConfig = GoRouter(
       pageBuilder: (context, state) => buildPageWithDefaultTransition(
         context: context,
         state: state,
-        child: WrapperScreen(),
+        child: const WrapperScreen(),
       ),
     ),
   ],

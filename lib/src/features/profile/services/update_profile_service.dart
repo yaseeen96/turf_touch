@@ -2,12 +2,10 @@ import 'dart:io';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as storage;
 import 'package:dio/dio.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:turf_touch/src/config/dio/dio_config.dart';
 import 'package:turf_touch/src/shared/exceptions/exceptions.dart';
 import 'dart:math';
 import 'dart:convert';
-import 'package:intl/intl.dart';
 
 String generateRandomName() {
   final timestamp = DateTime.now().millisecondsSinceEpoch;

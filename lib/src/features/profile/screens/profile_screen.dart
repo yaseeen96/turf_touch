@@ -218,7 +218,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           );
         },
         error: (err, stk) {
-          return Center(
+          return const Center(
             child: Text("Uh Oh.. Something went Wrong."),
           );
         },

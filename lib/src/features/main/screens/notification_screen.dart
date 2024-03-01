@@ -14,7 +14,7 @@ class NotificationScreen extends StatelessWidget {
           CircleAvatar(
             backgroundColor: CTheme.of(context).theme.primaryColor,
             radius: 80,
-            child: Icon(
+            child: const Icon(
               Icons.notifications,
               size: 80,
               color: Colors.white,
