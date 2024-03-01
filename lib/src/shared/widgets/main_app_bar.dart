@@ -1,3 +1,4 @@
+import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:gap/gap.dart';
@@ -91,6 +92,14 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       actions: [
+        IconButton(
+            onPressed: () {
+              BetterFeedback.of(context).show((UserFeedback feedback) {
+                // TODO - Add Feedback
+                // Do something with the feedback
+              });
+            },
+            icon: Icon(Icons.feedback)),
         IconButton(
           onPressed: () {
             CTheme.of(context)

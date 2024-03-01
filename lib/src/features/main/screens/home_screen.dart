@@ -16,20 +16,20 @@ class HomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Gap(20),
-          Container(
-            alignment: Alignment.center,
-            height: 100,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.amber,
-            ),
-            child: Text(
-              "Upcoming Bookings",
-              style: CTheme.of(context).theme.bodyText,
-            ),
-          ),
-          const Gap(20),
+          // Container(
+          //   alignment: Alignment.center,
+          //   height: 100,
+          //   width: double.infinity,
+          //   decoration: BoxDecoration(
+          //     borderRadius: BorderRadius.circular(20),
+          //     color: Colors.amber,
+          //   ),
+          //   child: Text(
+          //     "Upcoming Bookings",
+          //     style: CTheme.of(context).theme.bodyText,
+          //   ),
+          // ),
+          // const Gap(20),
           CarouselSlider(
             options: CarouselOptions(
               height: 250,

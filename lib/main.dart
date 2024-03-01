@@ -1,3 +1,4 @@
+import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:turf_touch/src/config/router/router_config.dart';
@@ -7,9 +8,11 @@ import 'package:turf_touch/src/config/theme/theme_state.dart';
 void main() {
   runApp(
     ProviderScope(
-      child: CTheme(
-        theme: lightThemeData,
-        child: const MyApp(),
+      child: BetterFeedback(
+        child: CTheme(
+          theme: lightThemeData,
+          child: const MyApp(),
+        ),
       ),
     ),
   );
