@@ -6,9 +6,10 @@ import 'package:turf_touch/src/config/theme/theme_state.dart';
 import 'package:turf_touch/src/features/authentication/landing/screens/landing_screen.dart';
 import 'package:turf_touch/src/features/authentication/login/screens/login_screen.dart';
 import 'package:turf_touch/src/features/authentication/signup/screens/signup_screen.dart';
-import 'package:turf_touch/src/features/book_turf/screens/booking_history_screen.dart';
-import 'package:turf_touch/src/features/book_turf/screens/home_screen.dart';
-import 'package:turf_touch/src/features/book_turf/screens/notification_screen.dart';
+import 'package:turf_touch/src/features/main/features/book_turf/wrapper_screen.dart';
+import 'package:turf_touch/src/features/main/screens/booking_history_screen.dart';
+import 'package:turf_touch/src/features/main/screens/home_screen.dart';
+import 'package:turf_touch/src/features/main/screens/notification_screen.dart';
 import 'package:turf_touch/src/features/profile/screens/profile_screen.dart';
 import 'package:turf_touch/src/shared/providers/bottom_bar_index_provider.dart';
 import 'package:turf_touch/src/shared/widgets/bottom_bar.dart';
@@ -171,6 +172,15 @@ final goRouterConfig = GoRouter(
         context: context,
         state: state,
         child: const ProfileScreen(),
+      ),
+    ),
+    GoRoute(
+      parentNavigatorKey: _rootNavigatorKey,
+      path: "/booking_wrapper",
+      pageBuilder: (context, state) => buildPageWithDefaultTransition(
+        context: context,
+        state: state,
+        child: WrapperScreen(),
       ),
     ),
   ],

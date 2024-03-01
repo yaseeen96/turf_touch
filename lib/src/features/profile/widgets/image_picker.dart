@@ -7,9 +7,11 @@ import 'package:turf_touch/src/features/profile/widgets/bottom_picker_sheet.dart
 
 class TurfTouchImagePicker extends StatefulWidget {
   final Function(File?) onImagePicked;
+  final String? imageUrl;
   const TurfTouchImagePicker({
     super.key,
     required this.onImagePicked,
+    this.imageUrl,
   });
 
   @override
@@ -18,6 +20,7 @@ class TurfTouchImagePicker extends StatefulWidget {
 
 class TurfTouchImagePickerState extends State<TurfTouchImagePicker> {
   final ImagePicker _picker = ImagePicker();
+
   File? _image;
   bool uploadStatus = false;
 
@@ -112,8 +115,11 @@ class TurfTouchImagePickerState extends State<TurfTouchImagePicker> {
                         radius: MediaQuery.of(context).size.width / 5,
                         backgroundColor: Colors.grey,
                         backgroundImage: (_image != null)
-                            ? FileImage(_image!) as ImageProvider<Object>?
-                            : const AssetImage('assets/camera_img.png'),
+                            ? FileImage(_image!)
+                            : (widget.imageUrl != "" && widget.imageUrl != null)
+                                ? NetworkImage(widget.imageUrl!)
+                                    as ImageProvider<Object>?
+                                : const AssetImage('assets/camera_img.png'),
                       ),
                       const Positioned(
                         bottom: 15,

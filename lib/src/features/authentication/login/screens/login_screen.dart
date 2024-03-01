@@ -42,6 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
         const storage = FlutterSecureStorage();
         storage.write(key: "token", value: response.token);
         storage.write(key: "name", value: response.user!.firstName);
+        storage.write(key: "profile", value: response.user!.profile);
         if (!context.mounted) {
           return;
         }

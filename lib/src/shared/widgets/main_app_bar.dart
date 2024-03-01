@@ -22,20 +22,42 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             onTap: () {
               context.push("/profile");
             },
-            child: const CircleAvatar(
-              radius: 40,
-              foregroundImage: AssetImage("assets/sample_profile.jpeg"),
-            ),
+            child: FutureBuilder(
+                future: const FlutterSecureStorage().read(key: "profile"),
+                builder: (context, snapshot) {
+                  print(snapshot.data);
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return SizedBox(
+                        width: MediaQuery.of(context).size.width / 5,
+                        child: const LinearProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return const CircleAvatar(
+                      radius: 40,
+                      foregroundImage: AssetImage("assets/sample_profile.jpeg"),
+                    );
+                  } else if (snapshot.hasData) {
+                    return CircleAvatar(
+                      radius: 40,
+                      foregroundImage: NetworkImage(snapshot.data!),
+                    );
+                  }
+                  return const CircleAvatar(
+                    radius: 40,
+                    foregroundImage: AssetImage("assets/sample_profile.jpeg"),
+                  );
+                }),
           ),
           const Gap(10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               FutureBuilder(
-                  future: FlutterSecureStorage().read(key: "name"),
+                  future: const FlutterSecureStorage().read(key: "name"),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const LinearProgressIndicator();
+                      return SizedBox(
+                          width: MediaQuery.of(context).size.width / 2,
+                          child: const LinearProgressIndicator());
                     } else if (snapshot.hasError) {
                       return Text(
                         "Welcome User",

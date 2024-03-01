@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:turf_touch/src/config/theme/theme_state.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -68,6 +69,7 @@ class HomeScreen extends StatelessWidget {
           const Gap(10),
           SizedBox(
             height: 75,
+            width: MediaQuery.of(context).size.width,
             child: ListView(
               physics: const ScrollPhysics(),
               scrollDirection: Axis.horizontal,
@@ -94,10 +96,12 @@ class HomeScreen extends StatelessWidget {
             alignment: Alignment.center,
             child: SizedBox(
               height: 50,
-              width: MediaQuery.of(context).size.width / 1.5,
+              width: MediaQuery.of(context).size.width,
               child: ElevatedButton(
                   style: CTheme.of(context).theme.buttonStyle,
-                  onPressed: () {},
+                  onPressed: () {
+                    context.push("/booking_wrapper");
+                  },
                   child: const Text("Get Started")),
             ),
           ),

@@ -39,11 +39,11 @@ class _SignupScreenState extends State<SignupScreen> {
         setState(() {
           isLoading = true;
         });
-        print("email: $email");
-        print("password: $pass");
-        print("mobilenumber: $mobileNumber");
-        print("fname: $fName");
-        print("lname: $lName");
+        // print("email: $email");
+        // print("password: $pass");
+        // print("mobilenumber: $mobileNumber");
+        // print("fname: $fName");
+        // print("lname: $lName");
         final response = await signupService(
           email: email!,
           password: pass!,

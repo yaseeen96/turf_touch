@@ -9,6 +9,8 @@ class MakeInput extends StatelessWidget {
   final Function(String? value) onSaved;
   final String? prefixText;
   final TextInputType? textInputType;
+  final String? value;
+  final bool isReadOnly;
   const MakeInput({
     super.key,
     required this.label,
@@ -18,6 +20,8 @@ class MakeInput extends StatelessWidget {
     this.prefixText,
     this.onChanged,
     this.textInputType,
+    this.value,
+    this.isReadOnly = false,
   });
 
   @override
@@ -33,6 +37,8 @@ class MakeInput extends StatelessWidget {
           height: 5,
         ),
         TextFormField(
+          readOnly: isReadOnly,
+          initialValue: value,
           keyboardType: textInputType,
           onChanged: (value) {
             if (onChanged != null) {
