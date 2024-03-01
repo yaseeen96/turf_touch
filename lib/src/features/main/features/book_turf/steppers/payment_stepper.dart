@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:turf_touch/src/config/theme/theme_state.dart';
 import 'package:turf_touch/src/features/main/features/book_turf/models/get_packages_response_model.dart';
 import 'package:turf_touch/src/features/main/features/book_turf/providers/book_turf_providers.dart';
 import 'package:turf_touch/src/features/main/features/book_turf/services/get_packages_service.dart';
+import 'package:turf_touch/src/features/main/features/payment/providers/payment_providers.dart';
+import 'package:turf_touch/src/features/main/features/payment/services/create_order_service.dart';
 import 'package:turf_touch/src/shared/exceptions/exceptions.dart';
 import 'package:turf_touch/src/shared/helpers/convert_to_12.dart';
 import 'package:turf_touch/src/shared/widgets/top_snackbar.dart';
@@ -40,6 +43,44 @@ class _PaymentStepperState extends ConsumerState<PaymentStepper> {
   String formatSelectedSlots(List<String> slots) {
     // Convert each slot to 12-hour format and join with a comma and a space
     return slots.map((slot) => convertTo12HourFormat(slot)).join(', ');
+  }
+
+  void onPaymentPress() async {
+    if (razorPay) {
+      // Place order from API
+      try {
+        // Assuming totalPrice is a double, convert it to paise by multiplying by 100
+        final int amountInRupees = totalPrice.toInt();
+        print("Amount in paise: $amountInRupees");
+
+        final response =
+            await createRazorpayOrder(amountInRupees: amountInRupees);
+        final orderId = response.id;
+        final amount = response.amount;
+        print("order id: $orderId");
+        print("amount: $amount");
+
+        // Updating global state
+        ref.read(orderIdProvider.notifier).state = orderId;
+        ref.read(amountProvider.notifier).state = amount;
+
+        // Navigate or perform further actions here, ensuring context is still mounted
+        if (!context.mounted) {
+          return;
+        }
+        context.push("/razor_pay");
+        // Navigate to the payment screen or show a confirmation
+      } on TurfTouchException catch (_) {
+        // Ensure the widget is still in the tree before trying to show a snackbar
+        if (!context.mounted) {
+          return;
+        }
+        getSnackBar(context: context, message: "Couldn't process the payment.");
+      }
+    } else {
+      // TODO - call offline orders API
+      // Handle the offline scenario or other payment methods
+    }
   }
 
   @override
@@ -235,7 +276,7 @@ class _PaymentStepperState extends ConsumerState<PaymentStepper> {
             width: double.infinity,
             height: 60,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: onPaymentPress,
               style: CTheme.of(context).theme.buttonStyle,
               child: const Text("Pay"),
             ),

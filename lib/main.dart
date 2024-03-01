@@ -21,6 +21,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      theme:
+          ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.red)),
       debugShowCheckedModeBanner: false,
       title: 'Turf Touch Application',
       routerConfig: goRouterConfig,

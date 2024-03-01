@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:turf_touch/src/config/theme/theme_state.dart';
+import 'package:turf_touch/src/constants/amenities.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -58,7 +59,7 @@ class HomeScreen extends StatelessWidget {
           ),
           const Gap(10),
           Text(
-            "Lorem ipsum dolor sit amet consectetur. Adipiscing felis egestas fermentum molestie. Gravida porttitor sit tincidunt sapien commo pellentesque. Lacinia quis pharetra feugiat eu scelerisque amet pulvinar. Fermentum pulvinar purus sed enim volutpat.",
+            "Experience a day packed with sportsmanship, enjoying football and cricket matches. Convenient parking, complimentary water refreshments, and additional amenities ensure a seamless experience for you and your group.",
             style: CTheme.of(context).theme.bodyText,
           ),
           const Gap(10),
@@ -75,12 +76,12 @@ class HomeScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
               children: [
-                for (int i = 0; i <= 7; i++)
+                for (String i in amenities)
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Chip(
-                      label: const Text(
-                        "Parking",
+                      label: Text(
+                        i,
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(100),

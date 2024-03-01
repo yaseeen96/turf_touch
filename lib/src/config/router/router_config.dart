@@ -7,11 +7,13 @@ import 'package:turf_touch/src/features/authentication/landing/screens/landing_s
 import 'package:turf_touch/src/features/authentication/login/screens/login_screen.dart';
 import 'package:turf_touch/src/features/authentication/signup/screens/signup_screen.dart';
 import 'package:turf_touch/src/features/main/features/book_turf/wrapper_screen.dart';
+import 'package:turf_touch/src/features/main/features/payment/razor_pay_screen.dart';
 import 'package:turf_touch/src/features/main/screens/booking_history_screen.dart';
 import 'package:turf_touch/src/features/main/screens/home_screen.dart';
 import 'package:turf_touch/src/features/main/screens/notification_screen.dart';
 import 'package:turf_touch/src/features/profile/screens/profile_screen.dart';
 import 'package:turf_touch/src/shared/providers/bottom_bar_index_provider.dart';
+import 'package:turf_touch/src/shared/screens/order_failure_screen.dart';
 import 'package:turf_touch/src/shared/widgets/bottom_bar.dart';
 import 'package:turf_touch/src/shared/widgets/main_app_bar.dart';
 
@@ -181,6 +183,24 @@ final goRouterConfig = GoRouter(
         context: context,
         state: state,
         child: const WrapperScreen(),
+      ),
+    ),
+    GoRoute(
+      parentNavigatorKey: _rootNavigatorKey,
+      path: "/order_failure",
+      pageBuilder: (context, state) => buildPageWithDefaultTransition(
+        context: context,
+        state: state,
+        child: OrderFailureScreen(),
+      ),
+    ),
+    GoRoute(
+      parentNavigatorKey: _rootNavigatorKey,
+      path: "/razor_pay",
+      pageBuilder: (context, state) => buildPageWithDefaultTransition(
+        context: context,
+        state: state,
+        child: const RazorPayScreen(),
       ),
     ),
   ],
