@@ -1,10 +1,12 @@
 import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:turf_touch/src/config/theme/app_theme.dart';
-import 'package:turf_touch/src/config/theme/theme_state.dart'; // Import your custom theme
+import 'package:turf_touch/src/config/theme/theme_state.dart';
+import 'package:turf_touch/src/shared/providers/name_provider.dart'; // Import your custom theme
 
 // Define your custom AppBar widget
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -33,17 +35,17 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                         child: const LinearProgressIndicator());
                   } else if (snapshot.hasError) {
                     return const CircleAvatar(
-                      radius: 40,
+                      radius: 30,
                       foregroundImage: AssetImage("assets/sample_profile.jpeg"),
                     );
                   } else if (snapshot.hasData) {
                     return CircleAvatar(
-                      radius: 40,
+                      radius: 30,
                       foregroundImage: NetworkImage(snapshot.data!),
                     );
                   }
                   return const CircleAvatar(
-                    radius: 40,
+                    radius: 30,
                     foregroundImage: AssetImage("assets/sample_profile.jpeg"),
                   );
                 }),
@@ -52,29 +54,33 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FutureBuilder(
-                  future: const FlutterSecureStorage().read(key: "name"),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return SizedBox(
-                          width: MediaQuery.of(context).size.width / 2,
-                          child: const LinearProgressIndicator());
-                    } else if (snapshot.hasError) {
+              Consumer(
+                builder: (context, ref, child) => FutureBuilder(
+                    future: ref.watch(fullNameProvider.future),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return SizedBox(
+                            width: MediaQuery.of(context).size.width / 2,
+                            child: const LinearProgressIndicator());
+                      } else if (snapshot.hasError) {
+                        return Text(
+                          "Welcome User",
+                          style: CTheme.of(context).theme.subheading,
+                        );
+                      } else if (snapshot.hasData) {
+                        return FittedBox(
+                          child: Text(
+                            "Welcome ${snapshot.data}",
+                            style: CTheme.of(context).theme.subheading,
+                          ),
+                        );
+                      }
                       return Text(
                         "Welcome User",
                         style: CTheme.of(context).theme.subheading,
                       );
-                    } else if (snapshot.hasData) {
-                      return Text(
-                        "Welcome ${snapshot.data}",
-                        style: CTheme.of(context).theme.subheading,
-                      );
-                    }
-                    return Text(
-                      "Welcome User",
-                      style: CTheme.of(context).theme.subheading,
-                    );
-                  }),
+                    }),
+              ),
               Row(
                 children: [
                   const Icon(

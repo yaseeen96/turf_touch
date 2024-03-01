@@ -30,13 +30,13 @@ class _WrapperScreenState extends State<WrapperScreen> {
             _currentStep > 0 ? () => setState(() => _currentStep -= 1) : null,
         steps: <Step>[
           Step(
-            title: const Text('Select Date'),
+            title: Text('Date'),
             content: const ChooseDateStepper(),
             isActive: _currentStep >= 0,
             state: _currentStep >= 0 ? StepState.complete : StepState.disabled,
           ),
           Step(
-            title: const Text('Select Time'),
+            title: const Text('Time'),
             content: const SelectTimeStepper(),
             isActive: _currentStep >= 0,
             state: _currentStep >= 1 ? StepState.complete : StepState.disabled,

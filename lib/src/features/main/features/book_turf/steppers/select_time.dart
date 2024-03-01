@@ -16,6 +16,12 @@ class SelectTimeStepper extends ConsumerStatefulWidget {
 }
 
 class _SelectTimeStepperState extends ConsumerState<SelectTimeStepper> {
+  @override
+  void didChangeDependencies() {
+    fetchBookedSlots();
+    super.didChangeDependencies();
+  }
+
   List<String> bookedSlots = [];
   void _onTimeSlotSelected(bool selected, String timeSlot) {
     final currentSelected = ref.read(selectedTimeSlotsProvider.notifier).state;
@@ -24,6 +30,7 @@ class _SelectTimeStepperState extends ConsumerState<SelectTimeStepper> {
     } else {
       currentSelected.remove(timeSlot);
     }
+
     ref.read(selectedTimeSlotsProvider.notifier).state =
         List.from(currentSelected); // Update the global state
   }

@@ -11,6 +11,7 @@ import 'package:turf_touch/src/features/profile/services/update_profile_service.
 import 'package:turf_touch/src/features/profile/widgets/bottom_picker_sheet.dart';
 import 'package:turf_touch/src/features/profile/widgets/image_picker.dart';
 import 'package:turf_touch/src/shared/exceptions/exceptions.dart';
+import 'package:turf_touch/src/shared/providers/name_provider.dart';
 import 'package:turf_touch/src/shared/validators/validators.dart';
 import 'package:turf_touch/src/shared/widgets/make_input.dart';
 import 'package:turf_touch/src/shared/widgets/top_snackbar.dart';
@@ -23,6 +24,7 @@ class ProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _ProfileScreenState extends ConsumerState<ProfileScreen> {
+  final storage = FlutterSecureStorage();
   final formKey = GlobalKey<FormState>();
   File? _pickedImage;
   String? fname;
@@ -58,6 +60,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           if (!context.mounted) {
             return;
           }
+          storage.write(key: "name", value: fname ?? dataFirstName);
+          ref.invalidate(fullNameProvider);
           getSnackBar(context: context, message: "Profile Updated");
         }
       } on TurfTouchException catch (err) {
@@ -95,6 +99,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       extendBodyBehindAppBar: true,
       backgroundColor: CTheme.of(context).theme.backgroundColor,
       appBar: AppBar(
+        foregroundColor: CTheme.of(context).theme.backgroundColor,
         backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
       ),

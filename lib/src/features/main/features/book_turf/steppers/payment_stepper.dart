@@ -163,12 +163,12 @@ class _PaymentStepperState extends ConsumerState<PaymentStepper> {
                 ],
                 color: CTheme.of(context).theme.backgroundColor),
             width: double.infinity,
-            height: 120,
+            height: 200,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                    flex: 3,
+                    flex: 5,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -185,7 +185,7 @@ class _PaymentStepperState extends ConsumerState<PaymentStepper> {
                     )),
                 const Gap(20),
                 Expanded(
-                  flex: 1,
+                  flex: 3,
                   child: Text(
                     " ₹${totalPrice.toStringAsFixed(2)}",
                     style: CTheme.of(context).theme.subheading.copyWith(
