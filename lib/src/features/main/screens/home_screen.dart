@@ -65,7 +65,7 @@ class HomeScreen extends ConsumerWidget {
                         height: 250,
                         viewportFraction: 1,
                       ),
-                      items: [1, 2, 3].map((i) {
+                      items: data.sliderImages!.map((imageUrl) {
                         return Builder(
                           builder: (BuildContext context) {
                             return Container(
@@ -75,8 +75,9 @@ class HomeScreen extends ConsumerWidget {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage("assets/turf/$i.jpg"))),
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(imageUrl),
+                                  )),
                             );
                           },
                         );
