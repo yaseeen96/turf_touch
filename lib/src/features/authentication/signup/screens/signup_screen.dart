@@ -52,7 +52,7 @@ class _SignupScreenState extends State<SignupScreen> {
           lastName: lName!,
         );
 
-        if (!context.mounted) {
+        if (!mounted) {
           return;
         }
         getSnackBar(context: context, message: response);
@@ -159,7 +159,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           onChanged: (value) {
                             pass = value;
                           },
-                          obscureText: true,
+                          isPassword: true,
                           validator: (value) {
                             return passwordValidator(value);
                           },
@@ -171,7 +171,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       duration: const Duration(milliseconds: 1400),
                       child: MakeInput(
                         label: "Confirm Password",
-                        obscureText: true,
+                        isPassword: true,
                         validator: (value) {
                           if (value != pass) {
                             return "Passwords do not match";

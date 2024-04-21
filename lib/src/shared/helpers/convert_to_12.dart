@@ -1,3 +1,5 @@
+import 'package:logger/logger.dart';
+
 String convertTo12HourFormat(String timeSlot) {
   return timeSlot.split('-').map((time) {
     int hour = int.parse(time);
@@ -7,3 +9,5 @@ String convertTo12HourFormat(String timeSlot) {
     return "$hour $suffix";
   }).join(' - ');
 }
+
+final logger = Logger();

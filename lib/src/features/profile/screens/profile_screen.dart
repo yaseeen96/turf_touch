@@ -11,6 +11,7 @@ import 'package:turf_touch/src/features/profile/services/update_profile_service.
 import 'package:turf_touch/src/features/profile/widgets/bottom_picker_sheet.dart';
 import 'package:turf_touch/src/features/profile/widgets/image_picker.dart';
 import 'package:turf_touch/src/shared/exceptions/exceptions.dart';
+import 'package:turf_touch/src/shared/helpers/convert_to_12.dart';
 import 'package:turf_touch/src/shared/providers/name_provider.dart';
 import 'package:turf_touch/src/shared/validators/validators.dart';
 import 'package:turf_touch/src/shared/widgets/make_input.dart';
@@ -24,7 +25,7 @@ class ProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _ProfileScreenState extends ConsumerState<ProfileScreen> {
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
   final formKey = GlobalKey<FormState>();
   File? _pickedImage;
   String? fname;
@@ -39,7 +40,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     required String dataLastName,
   }) async {
     if (formKey.currentState == null) {
-      print("formkey is null");
+      logger.e("formkey is null");
       return;
     }
     if (formKey.currentState!.validate()) {
@@ -62,12 +63,15 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           }
           storage.write(key: "name", value: fname ?? dataFirstName);
           ref.invalidate(fullNameProvider);
+          ref.invalidate(getProfileProvider);
+          if (!mounted) return;
           getSnackBar(context: context, message: "Profile Updated");
         }
       } on TurfTouchException catch (err) {
         if (!context.mounted) {
           return;
         }
+        if (!mounted) return;
         getSnackBar(
             context: context, message: err.message, type: SNACKBARTYPE.error);
       } finally {
@@ -173,7 +177,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                 onSaved: (value) {
                                   fname = value;
                                 },
-                                obscureText: true,
+                                isPassword: true,
                               ),
                               SizedBox(
                                 height: 50,

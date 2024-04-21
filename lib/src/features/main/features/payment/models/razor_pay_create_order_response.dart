@@ -53,21 +53,21 @@ class RazorPayCreateOrderResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["entity"] = entity;
-    _data["amount"] = amount;
-    _data["amount_paid"] = amountPaid;
-    _data["amount_due"] = amountDue;
-    _data["currency"] = currency;
-    _data["receipt"] = receipt;
-    _data["offer_id"] = offerId;
-    _data["status"] = status;
-    _data["attempts"] = attempts;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["entity"] = entity;
+    data["amount"] = amount;
+    data["amount_paid"] = amountPaid;
+    data["amount_due"] = amountDue;
+    data["currency"] = currency;
+    data["receipt"] = receipt;
+    data["offer_id"] = offerId;
+    data["status"] = status;
+    data["attempts"] = attempts;
     if(notes != null) {
-      _data["notes"] = notes;
+      data["notes"] = notes;
     }
-    _data["created_at"] = createdAt;
-    return _data;
+    data["created_at"] = createdAt;
+    return data;
   }
 }

@@ -46,6 +46,45 @@ class _ChooseDateStepperState extends ConsumerState<ChooseDateStepper> {
           firstDay: DateTime.now(),
           lastDay: DateTime.utc(2030, 3, 14),
           focusedDay: focusDay,
+          calendarStyle: CalendarStyle(
+            selectedDecoration: BoxDecoration(
+              color: CTheme.of(context).theme.primaryColor,
+              shape: BoxShape.circle,
+            ),
+            selectedTextStyle: const TextStyle(color: Colors.white),
+            todayDecoration: BoxDecoration(
+              color: CTheme.of(context).theme.backgroundInverse,
+              shape: BoxShape.circle,
+            ),
+            todayTextStyle: TextStyle(
+              color: CTheme.of(context).theme.backgroundColor,
+            ),
+            defaultDecoration: const BoxDecoration(
+              color: Colors.green,
+              shape: BoxShape.circle,
+            ),
+            weekendDecoration: const BoxDecoration(
+              color: Colors.green,
+              shape: BoxShape.circle,
+            ),
+            weekendTextStyle: const TextStyle(
+              color: Colors.black,
+            ),
+            outsideDaysVisible: false,
+          ),
+          headerStyle: HeaderStyle(
+            formatButtonVisible: false,
+            titleCentered: true,
+            titleTextStyle: CTheme.of(context).theme.subheading,
+            leftChevronIcon: Icon(
+              Icons.chevron_left,
+              color: CTheme.of(context).theme.primaryColor,
+            ),
+            rightChevronIcon: Icon(
+              Icons.chevron_right,
+              color: CTheme.of(context).theme.primaryColor,
+            ),
+          ),
         ),
       ],
     );

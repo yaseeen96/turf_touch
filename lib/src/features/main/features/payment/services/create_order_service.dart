@@ -12,7 +12,7 @@ Future<RazorPayCreateOrderResponse> createRazorpayOrder(
   const keySecret = "cRWLE7CLQZdx8nRQWILYyvd4";
 
   // Basic authentication encoding
-  final auth = 'Basic ' + base64Encode(utf8.encode('$keyId:$keySecret'));
+  final auth = 'Basic ${base64Encode(utf8.encode('$keyId:$keySecret'))}';
   // Convert amount from rupees to paise
   final int amountInPaise = (amountInRupees * 100).round();
 

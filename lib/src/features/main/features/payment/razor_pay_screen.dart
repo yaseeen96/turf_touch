@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:turf_touch/src/config/theme/theme_state.dart';
 import 'package:turf_touch/src/features/main/features/payment/providers/payment_providers.dart';
+import 'package:turf_touch/src/shared/helpers/convert_to_12.dart';
 
 class RazorPayScreen extends ConsumerStatefulWidget {
   const RazorPayScreen({super.key});
@@ -32,7 +33,7 @@ class _RazorPayScreenState extends ConsumerState<RazorPayScreen> {
 
   void _handlePaymentError(PaymentFailureResponse response) {
     // Do something when payment fails
-    print("error from handlepayment error: ${response.message}");
+    logger.e("error from handlepayment error: ${response.message}");
     context.go("/order_failure");
   }
 

@@ -7,6 +7,8 @@ import 'package:turf_touch/src/shared/exceptions/exceptions.dart';
 import 'dart:math';
 import 'dart:convert';
 
+import 'package:turf_touch/src/shared/helpers/convert_to_12.dart';
+
 String generateRandomName() {
   final timestamp = DateTime.now().millisecondsSinceEpoch;
   final random = Random.secure();
@@ -45,7 +47,7 @@ Future<bool> updateProfileService({
     }
     return true;
   } on DioException catch (err) {
-    print(err.response!.data.toString());
+    logger.e(err.response!.data.toString());
     throw TurfTouchException("Can't Update Data");
   }
 }

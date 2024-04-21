@@ -191,7 +191,7 @@ final goRouterConfig = GoRouter(
       pageBuilder: (context, state) => buildPageWithDefaultTransition(
         context: context,
         state: state,
-        child: OrderFailureScreen(),
+        child: const OrderFailureScreen(),
       ),
     ),
     GoRoute(

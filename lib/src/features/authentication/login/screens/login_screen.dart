@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
         storage.write(key: "token", value: response.token);
         storage.write(key: "name", value: response.user!.firstName);
         storage.write(key: "profile", value: response.user!.profile);
-        if (!context.mounted) {
+        if (!mounted) {
           return;
         }
         context.go("/home");
@@ -134,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   duration: const Duration(milliseconds: 1300),
                                   child: MakeInput(
                                     label: "Password",
-                                    obscureText: true,
+                                    isPassword: true,
                                     validator: (value) {
                                       // TODO - Add passwordValidator
                                       // return passwordValidator(value);

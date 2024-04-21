@@ -39,12 +39,12 @@ class SingleBookingCard extends StatelessWidget {
                       fit: BoxFit.cover,
                       image: AssetImage(randomBookingImages[
                           Random().nextInt(randomBookingImages.length)])),
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(20),
                       bottomLeft: Radius.circular(20))),
             ),
           ),
-          Gap(10),
+          const Gap(10),
           Expanded(
             flex: 8,
             child: Container(
@@ -52,7 +52,7 @@ class SingleBookingCard extends StatelessWidget {
               height: double.infinity,
               decoration: BoxDecoration(
                 color: CTheme.of(context).theme.backgroundColor,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(20),
                     bottomRight: Radius.circular(20)),
               ),

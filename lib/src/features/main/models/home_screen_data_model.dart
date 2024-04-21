@@ -60,21 +60,21 @@ class HomeScreenDataModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
     if (sliderImages != null) {
-      _data["slider_images"] = sliderImages;
+      data["slider_images"] = sliderImages;
     }
-    _data["description"] = description;
+    data["description"] = description;
     if (amenities != null) {
-      _data["amenities"] = amenities;
+      data["amenities"] = amenities;
     }
-    _data["phone_no"] = phoneNo;
-    _data["location"] = location;
-    _data["latitude"] = latitude;
-    _data["longitude"] = longitude;
-    _data["created_at"] = createdAt;
-    _data["updated_at"] = updatedAt;
-    return _data;
+    data["phone_no"] = phoneNo;
+    data["location"] = location;
+    data["latitude"] = latitude;
+    data["longitude"] = longitude;
+    data["created_at"] = createdAt;
+    data["updated_at"] = updatedAt;
+    return data;
   }
 }

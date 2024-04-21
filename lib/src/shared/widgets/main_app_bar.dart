@@ -1,14 +1,12 @@
 import 'package:feedback/feedback.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:turf_touch/src/config/theme/app_theme.dart';
 import 'package:turf_touch/src/config/theme/theme_state.dart';
 import 'package:turf_touch/src/features/profile/providers/get_profile_provider.dart';
+import 'package:turf_touch/src/shared/helpers/convert_to_12.dart';
 import 'package:turf_touch/src/shared/providers/name_provider.dart'; // Import your custom theme
 
 // Define your custom AppBar widget
@@ -33,7 +31,7 @@ class MainAppBar extends ConsumerWidget implements PreferredSizeWidget {
               child: FutureBuilder(
                   future: ref.read(getProfileProvider.future),
                   builder: (context, snapshot) {
-                    print(snapshot.data);
+                    logger.i(snapshot.data);
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return SizedBox(
                           width: MediaQuery.of(context).size.width / 5,
@@ -117,7 +115,7 @@ class MainAppBar extends ConsumerWidget implements PreferredSizeWidget {
                 // Do something with the feedback
               });
             },
-            icon: Icon(Icons.feedback)),
+            icon: const Icon(Icons.feedback)),
         IconButton(
           onPressed: () {
             CTheme.of(context)

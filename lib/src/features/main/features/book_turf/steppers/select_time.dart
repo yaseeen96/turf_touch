@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:turf_touch/src/config/theme/theme_state.dart';
@@ -6,6 +5,7 @@ import 'package:turf_touch/src/constants/time_slots.dart';
 import 'package:turf_touch/src/features/main/features/book_turf/providers/book_turf_providers.dart';
 import 'package:turf_touch/src/features/main/features/book_turf/services/get_booked_slots.dart';
 import 'package:turf_touch/src/shared/exceptions/exceptions.dart';
+import 'package:turf_touch/src/shared/helpers/convert_to_12.dart';
 
 class SelectTimeStepper extends ConsumerStatefulWidget {
   const SelectTimeStepper({super.key});
@@ -24,6 +24,8 @@ class _SelectTimeStepperState extends ConsumerState<SelectTimeStepper> {
 
   List<String> bookedSlots = [];
   void _onTimeSlotSelected(bool selected, String timeSlot) {
+    // ignore: unused_result
+    ref.refresh(getPackagesProvider.future);
     final currentSelected = ref.read(selectedTimeSlotsProvider.notifier).state;
     if (selected) {
       currentSelected.add(timeSlot);
@@ -49,11 +51,12 @@ class _SelectTimeStepperState extends ConsumerState<SelectTimeStepper> {
     try {
       final response =
           await getBookedSlotsService(date: ref.read(selectedDateProvider)!);
+      logger.i(response.slots);
       setState(() {
         bookedSlots = response.slots ?? [];
       });
     } on TurfTouchException catch (err) {
-      print(err);
+      logger.e(err);
     }
   }
 
@@ -69,8 +72,6 @@ class _SelectTimeStepperState extends ConsumerState<SelectTimeStepper> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO - call API and remove time slots which are booked
-    final selectedDate = ref.watch(selectedDateProvider);
     List<String> selectedTimeSlots = ref.watch(selectedTimeSlotsProvider);
     List<String> availableTimeSlots =
         timeSlots.where((slot) => !bookedSlots.contains(slot)).toList();
@@ -83,6 +84,7 @@ class _SelectTimeStepperState extends ConsumerState<SelectTimeStepper> {
           String timeSlot =
               availableTimeSlots[index]; // Use availableTimeSlots for listing
           return CheckboxListTile(
+            activeColor: CTheme.of(context).theme.primaryColor,
             title: Text(
               convertTo12HourFormat(timeSlot),
               style: CTheme.of(context).theme.bodyText,

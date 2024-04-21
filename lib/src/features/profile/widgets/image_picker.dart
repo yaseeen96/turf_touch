@@ -28,7 +28,7 @@ class TurfTouchImagePickerState extends State<TurfTouchImagePicker> {
     final XFile? pickedImage =
         await _picker.pickImage(source: ImageSource.camera, imageQuality: 50);
     if (pickedImage == null) {
-      if (!context.mounted) {
+      if (!mounted) {
         return;
       }
       showAlertDialog(
@@ -51,7 +51,7 @@ class TurfTouchImagePickerState extends State<TurfTouchImagePicker> {
     final XFile? pickedImage =
         await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
     if (pickedImage == null) {
-      if (!context.mounted) {
+      if (!mounted) {
         return;
       }
       showAlertDialog(
